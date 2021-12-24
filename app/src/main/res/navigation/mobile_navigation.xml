@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/nav_home">
+
+    <fragment
+        android:id="@+id/nav_home"
+        android:name="com.yusuf.customerapp.ui.home.HomeFragment"
+        android:label="@string/menu_home"
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_nav_home_to_nav_customer"
+            app:destination="@id/nav_customer" />
+        <action
+            android:id="@+id/action_nav_home_to_nav_order"
+            app:destination="@id/nav_order" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/nav_customer"
+        android:name="com.yusuf.customerapp.ui.customer.CustomerFragment"
+        android:label="@string/menu_customer"
+        tools:layout="@layout/fragment_customer" >
+        <action
+            android:id="@+id/action_nav_customer_to_nav_home"
+            app:destination="@id/nav_home" />
+        <action
+            android:id="@+id/action_nav_customer_to_customerDetailsFragment"
+            app:destination="@id/customerDetailsFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/nav_order"
+        android:name="com.yusuf.customerapp.ui.order.OrderFragment"
+        android:label="@string/menu_order"
+        tools:layout="@layout/fragment_order" >
+        <action
+            android:id="@+id/action_nav_order_to_nav_home"
+            app:destination="@id/nav_home" />
+    </fragment>
+    <fragment
+        android:id="@+id/customerDetailsFragment"
+        android:name="com.yusuf.customerapp.ui.customer.CustomerDetailsFragment"
+        android:label="fragment_customer_details"
+        tools:layout="@layout/fragment_customer_details" >
+        <action
+            android:id="@+id/action_customerDetailsFragment_to_nav_customer"
+            app:destination="@id/nav_customer" />
+    </fragment>
+</navigation>
