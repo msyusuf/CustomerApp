@@ -9,9 +9,11 @@ import java.text.NumberFormat
 @Entity(tableName = "customer_table")
 data class Customer(
     @PrimaryKey(autoGenerate = true)
-    val id: Int = 0,
+    @NonNull
+    @ColumnInfo(name = "customer_Id")
+    var id: Int = 0,
 
-    @ColumnInfo(name = "cust_first_name")
+    @ColumnInfo(name = "first_name")
     val firstName: String,
 
     @ColumnInfo(name = "last_name")
@@ -24,3 +26,8 @@ data class Customer(
     constructor(id :String, firstName :String, lastName :String)
      : this(0, firstName, lastName)
 }
+
+data class NameTuple(
+    @ColumnInfo(name = "first_name") val firstName: String?,
+    @ColumnInfo(name = "last_name") val lastName: String?
+)

@@ -50,7 +50,10 @@ class CustomerFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        customerViewModel.deleteAllCustomers()
+       /*
+            For testing, create customers. They should appear in the recycler view.
+            customerViewModel.deleteAllCustomers()
+
         try {
             for (i in 1..10   ) {
                 val customerFirstName = "First name" + (100 + i )
@@ -64,6 +67,8 @@ class CustomerFragment : Fragment() {
                 Constants.LOG_TAG, String.format( "**** Exception In CustomerFragment, after createing customer object in Customer fragment%s", e.message)
             )
         }
+
+        */
        allCustomers = customerViewModel.allCustomers
 
         val adapter = CustomerAdapter(allCustomers!!)
@@ -101,7 +106,6 @@ class CustomerFragment : Fragment() {
 
 
     }
-
 
     override fun onDestroyView() {
         super.onDestroyView()

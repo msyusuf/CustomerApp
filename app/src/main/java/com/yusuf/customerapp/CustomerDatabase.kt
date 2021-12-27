@@ -18,7 +18,7 @@ import kotlinx.coroutines.launch
  * The fact that this has very few comments emphasizes its coolness.
  */
 
-@Database (entities = [Customer::class], version = 1)
+@Database (entities = [Customer::class], version = 2)
 abstract class CustomerDatabase : RoomDatabase() {
 
     abstract fun customerDao(): CustomerDao
@@ -62,8 +62,10 @@ abstract class CustomerDatabase : RoomDatabase() {
             override fun onCreate(db: SupportSQLiteDatabase) {
                 super.onCreate(db)
                 Log.i(LOG_TAG,"Inside CustomerDatabaseCallback, onCreate")
+
                 // If you want to keep the data through app restarts,
-                // comment out the following line.
+                // comment out the following lines and try catch. or
+                // comment out customerDao.deleteAll() in populateDatabase
                 try {
                     INSTANCE?.let { database ->
                         scope.launch(Dispatchers.IO) {

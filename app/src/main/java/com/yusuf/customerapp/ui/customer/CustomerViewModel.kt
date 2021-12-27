@@ -31,6 +31,7 @@ open class CustomerViewModel (private val repository: CustomerRepository) : View
     fun insert(customer: Customer) = viewModelScope.launch {
         repository.insert(customer)
     }
+
     fun deleteAllCustomers() = viewModelScope.launch {
         repository.deleteAllCustomers()
     }
@@ -38,7 +39,7 @@ open class CustomerViewModel (private val repository: CustomerRepository) : View
 class CustomerViewModelFactory(private val repository: CustomerRepository) :
     ViewModelProvider.Factory {
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
-        Log.i(LOG_TAG, "In CustomerViewModelFactory")
+        Log.i(LOG_TAG, "******** In CustomerViewModelFactory ******** ")
         if (modelClass.isAssignableFrom(CustomerViewModel::class.java)) {
             @Suppress("UNCHECKED_CAST")
             return CustomerViewModel(repository) as T
