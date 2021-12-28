@@ -20,23 +20,26 @@ interface CustomerDao {
 
     // Simple query that does not take parameters and returns nothing.
     @Query("DELETE FROM customer_table")
-    suspend fun deleteAll() :Void
+    suspend fun deleteAll() : Void
 
     @Query("SELECT first_name, last_name FROM customer_table")
     fun loadFullName(): List<NameTuple>
+
+    @Query("SELECT * FROM customer_table where customer_Id = :customer_Id")
+    fun getCustomerById(customer_Id : String): Flow<Customer> //Flow<List<Customer>>  // not sure how to handle this. should only return 1 customer
 
     // Specify the conflict strategy as IGNORE, when the user tries to add an
     // existing Item into the database Room ignores the conflict.
     // @Insert(onConflict = OnConflictStrategy.REPLACE)
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
-    suspend fun insert(customer: Customer)
+    suspend fun insert(customer: Customer) : Void
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertCustomers(vararg customers: Customer)
+    suspend fun insertCustomers(vararg customers: Customer) : Void
 
     @Update
-    suspend fun update(customer: Customer)
+    suspend fun update(customer: Customer) : Void
 
     @Update
     suspend fun updateCustomers(vararg customers: Customer)

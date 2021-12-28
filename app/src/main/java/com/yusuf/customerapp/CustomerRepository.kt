@@ -20,6 +20,16 @@ class CustomerRepository (private val customerDao: CustomerDao) {
     // Observed Flow will notify the observer when the data has changed.
     val allCustomers: Flow<List<Customer>> = customerDao.getAlphabetizedCustomers()
 
+    // val getCustomerById: Customer = customerDao.getCustomerById(cust_id : String)
+
+
+    @Suppress("RedundantSuspendModifier")
+    @WorkerThread
+    fun geCustomerById(cust_id: String) : Flow<Customer> {
+        return customerDao.getCustomerById(cust_id)
+    }
+
+
     // By default Room runs suspend queries off the main thread, therefore, we don't need to
     // implement anything else to ensure we're not doing long running database work
     // off the main thread.
@@ -46,4 +56,5 @@ class CustomerRepository (private val customerDao: CustomerDao) {
             Log.e(LOG_TAG, String.format( "**** Exception in CustomerRepository. Deleting all customers using CustomerDao.", e.message))
         }
     }
+
 }

@@ -42,7 +42,7 @@ class CustomerFragment : Fragment() {
         val root: View = binding.root
         Log.i(LOG_TAG, "CustomerFragment. Done onCreateView.")
         return root
-    }
+    } // end onCreateView
 
     /***
      * onViewCreated
@@ -50,9 +50,9 @@ class CustomerFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-       /*
-            For testing, create customers. They should appear in the recycler view.
-            customerViewModel.deleteAllCustomers()
+
+     // For testing, create customers. They should appear in the recycler view.
+    /*  customerViewModel.deleteAllCustomers()
 
         try {
             for (i in 1..10   ) {
@@ -66,9 +66,9 @@ class CustomerFragment : Fragment() {
             Log.e(
                 Constants.LOG_TAG, String.format( "**** Exception In CustomerFragment, after createing customer object in Customer fragment%s", e.message)
             )
-        }
+        } */
 
-        */
+
        allCustomers = customerViewModel.allCustomers
 
         val adapter = CustomerAdapter(allCustomers!!)
@@ -96,8 +96,8 @@ class CustomerFragment : Fragment() {
     /***
      *  recyclerSetup()
      */
-    private fun recyclerSetup() {
-    } // end recyclerSetup()
+//    private fun recyclerSetup() {
+//    } // end recyclerSetup()
 
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, intentData: Intent?) {

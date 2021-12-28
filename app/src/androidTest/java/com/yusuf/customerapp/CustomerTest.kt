@@ -82,4 +82,13 @@ class CustomerTest {
         val count = customerDao.getCustomerCount()
         assertEquals(2, count)
     }
+
+    @Test
+    @Throws(Exception::class)
+    fun getCustomerById() = runBlocking {
+        val customer = customerDao.getCustomerById("11")
+        assertEquals("First name101", customer.first().firstName)
+    }
+
+
 } // end CustomerTest

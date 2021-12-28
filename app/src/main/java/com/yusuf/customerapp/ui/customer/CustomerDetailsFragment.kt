@@ -11,28 +11,17 @@ import androidx.lifecycle.LiveData
 import com.yusuf.customerapp.Constants
 import com.yusuf.customerapp.Customer
 import com.yusuf.customerapp.CustomerApplication
-import com.yusuf.customerapp.R
 import com.yusuf.customerapp.databinding.FragmentCustomerBinding
 import com.yusuf.customerapp.databinding.FragmentCustomerDetailsBinding
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.first
 
 class CustomerDetailsFragment : Fragment() {
-
-/*
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        //return inflater.inflate(R.layout.fragment_customer_details, container, false)
-        return inflater.inflate(R.layout.fragment_customer_details, container, false)
-    }
-*/
 
 
     val customerViewModel: CustomerViewModel by viewModels {
         CustomerViewModelFactory((activity?.application as CustomerApplication).repository)
     }
-    // private var allCustomers: LiveData<List<Customer>>? = null
 
     private var _binding: FragmentCustomerDetailsBinding? = null
     private val binding get() = _binding!!
@@ -48,9 +37,24 @@ class CustomerDetailsFragment : Fragment() {
         Log.i(Constants.LOG_TAG, "Customer Details Fragment before binding. **")
         _binding = FragmentCustomerDetailsBinding.inflate(inflater, container, false)
         val root: View = binding.root
+
         Log.i(Constants.LOG_TAG, "Customer Details Fragment. Done onCreateView.")
         return root
+    } // end onCreateView
+
+    /***
+     * onViewCreated
+     */
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        val customer = customerViewModel.geCustomerById("11")           // customerViewModel.getCustById("11")
+        //Log.i(Constants.LOG_TAG, "Customer details fragment. ${customer.first().firstName}.  Done ** onViewCreated. **")
     }
 
-
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+        Log.i(Constants.LOG_TAG, "On Destroy called for Customer DETAILS Fragment")
+    }
 }
