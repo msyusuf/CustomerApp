@@ -52,8 +52,8 @@ class CustomerFragment : Fragment() {
 
 
      // For testing, create customers. They should appear in the recycler view.
-    /*  customerViewModel.deleteAllCustomers()
-
+      //customerViewModel.deleteAllCustomers()
+        /*
         try {
             for (i in 1..10   ) {
                 val customerFirstName = "First name" + (100 + i )
@@ -66,8 +66,8 @@ class CustomerFragment : Fragment() {
             Log.e(
                 Constants.LOG_TAG, String.format( "**** Exception In CustomerFragment, after createing customer object in Customer fragment%s", e.message)
             )
-        } */
-
+        }
+        */
 
        allCustomers = customerViewModel.allCustomers
 

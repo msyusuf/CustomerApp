@@ -7,14 +7,12 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.LiveData
+import androidx.lifecycle.lifecycleScope
 import com.yusuf.customerapp.Constants
-import com.yusuf.customerapp.Customer
 import com.yusuf.customerapp.CustomerApplication
-import com.yusuf.customerapp.databinding.FragmentCustomerBinding
 import com.yusuf.customerapp.databinding.FragmentCustomerDetailsBinding
-import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.launch
 
 class CustomerDetailsFragment : Fragment() {
 
@@ -27,8 +25,7 @@ class CustomerDetailsFragment : Fragment() {
     private val binding get() = _binding!!
 
     /***
-     * onCreateView
-     */
+     * onCreateView */
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -43,18 +40,23 @@ class CustomerDetailsFragment : Fragment() {
     } // end onCreateView
 
     /***
-     * onViewCreated
-     */
-
+     * onViewCreated */
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val customer = customerViewModel.geCustomerById("11")           // customerViewModel.getCustById("11")
-        //Log.i(Constants.LOG_TAG, "Customer details fragment. ${customer.first().firstName}.  Done ** onViewCreated. **")
-    }
+
+        lifecycleScope.launch {
+            val customer =
+                customerViewModel.getCustomerById("1")
+            val name = customer.first()?.firstName
+            Log.e(Constants.LOG_TAG, "**** Customer details fragment. Customer name is ${name}")
+        } // end LifecycleScope.launch
+
+    }   // end fun onViewCreated
 
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
         Log.i(Constants.LOG_TAG, "On Destroy called for Customer DETAILS Fragment")
-    }
-}
+    } // end onDestroy
+
+} // end class CustomerDetailsFragment

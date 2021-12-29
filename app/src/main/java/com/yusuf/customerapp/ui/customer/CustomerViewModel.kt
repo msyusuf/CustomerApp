@@ -38,19 +38,15 @@ open class CustomerViewModel (private val repository: CustomerRepository) : View
     }
 
     /*
+        https://stackoverflow.com/questions/70512242/android-kotlin-room-database-query-fails-when-called-from-viewmodel-passes-fro
         https://stackoverflow.com/questions/61034666/how-to-return-a-single-non-livedata-object-from-room-using-coroutines#:~:text=Dao%3A%20getTask%20%28%29%3A%20this%20method%20return%20a%20Flow%3CTask%3E%3A,object%20%28not%20Flow%3CTask%3E%29%2C%20also%20it%20is%20suspend%20function.
      */
-    fun geCustomerById(cust_id: String) : Flow<Customer> {
-        return repository.geCustomerById(cust_id)
+    fun getCustomerById(cust_id: String) : Flow<Customer>  {
+        return repository.getCustomerById(cust_id)
     }
 
-//    suspend fun getCustById(cust_id: String) = viewModelScope.launch {
-//        return geCustomerById(cust_id)
-//    }
+    fun geCustById(cust_id: String) : Flow<Customer> = repository.getCustomerById(cust_id)
 
-//    fun geCustomerById(cust_id: String) = viewModelScope.launch {
-//        repository.geCustomerById(cust_id)
-//    }
 } // end CustomerViewModel
 
 
